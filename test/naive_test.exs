@@ -39,4 +39,20 @@ defmodule NaiveTest do
     end
   end
 
+  describe "Enum.reverse" do
+    test "empyt list should return an empty list" do
+      assert reverse([]) == []
+    end
+    test "should reverse a list" do
+      a = Enum.to_list(1..3)
+      assert reverse(a) == [3, 2, 1]
+    end
+
+    test "should reverse a large list" do
+      reversed_list = 1..10 |> Enum.to_list |> reverse
+      assert reversed_list == Enum.to_list(10..1)
+    end
+  end
+
+
 end
