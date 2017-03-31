@@ -54,5 +54,34 @@ defmodule NaiveTest do
     end
   end
 
+  describe "Enum.find" do
+    test "find returns nil for empty list" do
+      assert find([], & &1 == :ok) == nil
+    end
+
+    test "returns nil if it does not finds a number in a list" do
+      assert find([1, 2, 3], fn x -> x == 6 end) == nil
+    end
+
+    test "finds a number in a list" do
+      assert find([1, 2, 3], fn x -> x == 2 end) == 2
+    end
+
+    test "finds a map in a list" do
+      assert find([
+                    %{name: "Mujju"},
+                    %{name: "Zainab"},
+                    %{name: "Zohra"},
+                  ], fn x -> String.starts_with?(x.name, "M") end) == %{name: "Mujju"}
+    end
+
+    test "returns the first match" do
+      assert find([
+                    %{name: "Mujju"},
+                    %{name: "Zainab"},
+                    %{name: "Zohra"},
+                  ], fn x -> String.starts_with?(x.name, "Z") end) == %{name: "Zainab"}
+    end
+  end
 
 end

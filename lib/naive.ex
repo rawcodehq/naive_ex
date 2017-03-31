@@ -1,13 +1,18 @@
 defmodule Naive do
   defmodule Enum do
     #TODO
-    #reverse
-    #reduce/3
-    #map
     #filter
-    #find
     #at
-    #
+    def find([], _fun) do
+      nil
+    end
+    def find([head | rest], fun) do
+      if fun.(head) do
+        head
+      else
+        find(rest, fun)
+      end
+    end
 
     # hd -> next -> el2
     def reverse(list), do: reverse(list, [])
